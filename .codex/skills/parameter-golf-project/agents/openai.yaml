@@ -1,0 +1,4 @@
+interface:
+  display_name: "Parameter Golf Project"
+  short_description: "Local parameter-golf workflow rules"
+  default_prompt: "Use $parameter-golf-project to work in this local parameter-golf repo with the shared env, run, and git rules."
