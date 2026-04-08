@@ -22,6 +22,7 @@ Load the reference files on demand instead of treating this skill as a full copy
 - Use the shared dataset and tokenizer that `env.sh` exports; do not create duplicate local copies in the repo.
 - Use `tools/run_with_wandb.py` for monitored runs; it mirrors the existing text log and does not modify `train_gpt.py`.
 - Distinguish `official-baseline` from `a800-normalized`; only the latter stretches wallclock on this 4xA800 machine.
+- Default to `a800-normalized` for local runs unless the user explicitly asks for official challenge semantics, a 10 minute run, or an `official-baseline` reproduction.
 - Keep `origin` on the user's fork and `upstream` on `openai/parameter-golf`.
 - Never commit shared run artifacts, caches, datasets, or wandb run directories.
 - If details drift, trust the actual helpers first: `env.sh`, `tools/run_with_wandb.py`, and `tools/setup_fork_remote.sh`.

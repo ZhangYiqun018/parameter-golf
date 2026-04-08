@@ -48,31 +48,14 @@ The wrapper supports two budget presets:
   - target budget is derived from the official 8xH100 baseline step budget (`13780` steps in `600s`)
   - default derived wallclock is about `2473s`
 
+On this machine, the wrapper defaults to `a800-normalized`. Only pick `official-baseline`
+when you explicitly want the original challenge wallclock semantics.
+
 This means the local preset is useful for development and comparison on this machine, but it is not a claim of leaderboard equivalence.
 
 ## 4. Example commands
 
-Official semantics on the current machine:
-
-```bash
-source /fs-computility-new/Uma4agi/shared/zyq/parameter-golf/env.sh
-pgolf_activate
-pgolf_cd_run wandb_official_baseline
-
-CUDA_VISIBLE_DEVICES=0,1,2,3 \
-WANDB_PROJECT=parameter-golf \
-WANDB_MODE=offline \
-DATA_PATH="$PGOLF_DATASET_DIR" \
-TOKENIZER_PATH="$PGOLF_TOKENIZER_PATH" \
-VOCAB_SIZE=1024 \
-python /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf/tools/run_with_wandb.py \
-  --preset official-baseline \
-  --nproc-per-node 4 \
-  --run-id wandb_official_baseline \
-  --script /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf-worktrees/baseline/train_gpt.py
-```
-
-Local 4xA800 normalized budget:
+Default local 4xA800 semantics:
 
 ```bash
 source /fs-computility-new/Uma4agi/shared/zyq/parameter-golf/env.sh
@@ -89,6 +72,26 @@ python /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf/tools/ru
   --preset a800-normalized \
   --nproc-per-node 4 \
   --run-id wandb_a800_normalized \
+  --script /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf-worktrees/baseline/train_gpt.py
+```
+
+Official challenge semantics on the current machine:
+
+```bash
+source /fs-computility-new/Uma4agi/shared/zyq/parameter-golf/env.sh
+pgolf_activate
+pgolf_cd_run wandb_official_baseline
+
+CUDA_VISIBLE_DEVICES=0,1,2,3 \
+WANDB_PROJECT=parameter-golf \
+WANDB_MODE=offline \
+DATA_PATH="$PGOLF_DATASET_DIR" \
+TOKENIZER_PATH="$PGOLF_TOKENIZER_PATH" \
+VOCAB_SIZE=1024 \
+python /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf/tools/run_with_wandb.py \
+  --preset official-baseline \
+  --nproc-per-node 4 \
+  --run-id wandb_official_baseline \
   --script /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf-worktrees/baseline/train_gpt.py
 ```
 

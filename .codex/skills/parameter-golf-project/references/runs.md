@@ -40,12 +40,12 @@ torchrun --standalone --nproc_per_node=1 \
 Use `tools/run_with_wandb.py` for monitored runs. It launches the original training script and mirrors the rank-0 text log into wandb. It does not patch `train_gpt.py`.
 If there is any mismatch between this note and behavior, trust `tools/run_with_wandb.py` and `docs/local_wandb.md`.
 
-Online baseline example:
+Default online run on this machine:
 
 ```bash
 source /fs-computility-new/Uma4agi/shared/zyq/parameter-golf/env.sh
 pgolf_activate
-pgolf_cd_run wandb_baseline
+pgolf_cd_run wandb_a800_normalized
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 \
 WANDB_PROJECT=parameter-golf-dev \
@@ -54,9 +54,9 @@ DATA_PATH="$PGOLF_DATASET_DIR" \
 TOKENIZER_PATH="$PGOLF_TOKENIZER_PATH" \
 VOCAB_SIZE=1024 \
 python /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf/tools/run_with_wandb.py \
-  --preset official-baseline \
+  --preset a800-normalized \
   --nproc-per-node 4 \
-  --run-id wandb_baseline \
+  --run-id wandb_a800_normalized \
   --script /fs-computility-new/Uma4agi/zhangyiqun/zhangyiqun/parameter-golf-worktrees/baseline/train_gpt.py
 ```
 
@@ -81,6 +81,7 @@ Keep the meaning clear in notes and run names:
 
 - `official-baseline` is for reproducing the challenge wallclock semantics
 - `a800-normalized` is for more useful local development on this machine; it is not a leaderboard-equivalence claim
+- Default to `a800-normalized` unless the user explicitly asks for official challenge semantics or a 10 minute reproduction.
 
 ## Known local measurement
 

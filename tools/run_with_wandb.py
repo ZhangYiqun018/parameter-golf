@@ -166,8 +166,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--preset",
         choices=["official-baseline", "a800-normalized"],
-        default=os.environ.get("PGOLF_PRESET", "official-baseline"),
-        help="Budget preset. a800-normalized keeps the baseline recipe but stretches wallclock for 4xA800.",
+        default=os.environ.get("PGOLF_PRESET", "a800-normalized"),
+        help="Budget preset. Defaults to a800-normalized on this 4xA800 machine; use official-baseline only when you need the original 10 minute semantics.",
     )
     parser.add_argument("--wandb-project", default=os.environ.get("WANDB_PROJECT", "parameter-golf"))
     parser.add_argument("--wandb-entity", default=os.environ.get("WANDB_ENTITY"))
